@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EleveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
+
+//Crud Eleve
+Route::get('/ajouterEleve', [EleveController::class, 'create']);
+Route::post('/ajouterEleve', [EleveController::class, 'store']);
+Route::get("/listeEleves",[EleveController::class,"index"]);
+Route::get("modifierEleve/{id}",[EleveController::class,'edit']);
+Route::put("modifierEleve/{id}",[EleveController::class,'update']);
+Route::delete("supprimerEleve/{id} ",[EleveController::class,'destroy']);
