@@ -28,4 +28,5 @@ Route::post('/ajouterEleve', [EleveController::class, 'store']);
 Route::get("/listeEleves",[EleveController::class,"index"]);
 Route::get("modifierEleve/{id}",[EleveController::class,'edit'])->name('modifierEleve');
 Route::put("modifierEleve/{id}",[EleveController::class,'update']);
-Route::delete("supprimerEleve/{id} ",[EleveController::class,'destroy']);
+Route::get("supprimerEleve/{id} ",[EleveController::class,'destroy']);
+Route::delete("supprimerEleve/{id} ",[EleveController::class,'destroy'])->name('supprimerEleve');

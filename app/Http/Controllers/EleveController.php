@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreeleveRequest;
 use App\Http\Requests\UpdateeleveRequest;
 use App\Models\eleve;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 // use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -111,8 +112,15 @@ class EleveController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(eleve $eleve)
+    public function destroy(eleve $eleve, $id)
     {
-        //
+        try {
+            $eleve = eleve::findOrFail($id);
+            $eleve->delete();
+    
+            return redirect('/listeEleves')->with('success', 'L\'élève a été supprimé avec succès');
+        } catch (ModelNotFoundException $e) {
+            return redirect('/listeEleves')->with('error', 'Eleve non trouvé');
+        }
     }
 }
