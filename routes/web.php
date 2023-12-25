@@ -26,6 +26,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/ajouterEleve', [EleveController::class, 'create']);
 Route::post('/ajouterEleve', [EleveController::class, 'store']);
 Route::get("/listeEleves",[EleveController::class,"index"]);
-Route::get("modifierEleve/{id}",[EleveController::class,'edit']);
+Route::get("modifierEleve/{id}",[EleveController::class,'edit'])->name('modifierEleve');
 Route::put("modifierEleve/{id}",[EleveController::class,'update']);
 Route::delete("supprimerEleve/{id} ",[EleveController::class,'destroy']);

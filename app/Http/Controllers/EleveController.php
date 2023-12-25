@@ -89,27 +89,23 @@ class EleveController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(eleve $eleve, $id)
+    public function edit($id)
     {
         $eleve = eleve::find($id);
+        // dd($eleve);
 
-        return view('ajouterEleve', ['eleve' => $eleve]);
+        return view('modifierEleve', ['eleve' => $eleve]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateeleveRequest $request, eleve $eleve, $id)
+    public function update(UpdateeleveRequest $request, $id)
     {
-        $eleve = eleve::findOrFail($id);
-        return  view('ajouterEleve');
-        $eleve->update([
-            'nom'=>$request->get('nom'),
-            'prenom'=>$request->get('prenom'),
-            'date_naissance'=>$request->get('date_naissance'),
-            'classe'=>$request->get('classe'),
-            'sexe'=>$request->get('sexe'),
-        ]);
+        $eleve = eleve::find($id);
+        $eleve->update($request->all());
+
+        return redirect('/listeEleves')->with('success', 'Les informations de l\'eleve mis à jour avec succès');
     }
 
     /**
