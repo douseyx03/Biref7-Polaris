@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorenoteRequest;
 use App\Http\Requests\UpdatenoteRequest;
+use App\Models\eleve;
 use App\Models\note;
 
 class NoteController extends Controller
@@ -21,15 +22,19 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('ajouterNote');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorenoteRequest $request)
+    public function store(StorenoteRequest $request,eleve $eleve)
     {
-        //
+        $note = new note();
+        $note->matiere = $request->input('matiere');
+        $note->note = $request->input('note');
+        $note->save();
+        return view('afficherEleve', ['eleve' => $eleve]);
     }
 
     /**

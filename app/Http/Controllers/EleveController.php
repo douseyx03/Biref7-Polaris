@@ -82,9 +82,15 @@ class EleveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(eleve $eleve)
+    public function show(eleve $eleve,$id)
     {
-        //
+        try {
+            $eleve = eleve::findOrFail($id);
+    
+            return view('afficherEleve', ['eleve' => $eleve]);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/listeEleves')->with('error', 'eleve non trouvé');
+        }
     }
 
     /**
